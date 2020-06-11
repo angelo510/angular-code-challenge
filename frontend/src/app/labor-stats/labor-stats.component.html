@@ -1,0 +1,167 @@
+<h1 class="title">Labour cost report</h1>
+<table>
+  <thead>
+    <tr>
+      <th (click)="onSortTable('name')">
+        <div>
+          <span>
+            PAYROLL<br> PROVIDER 
+          </span>
+          <i
+            *ngIf="previousOption.columnName === 'name'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+      <th (click)="onSortTable('workerCount')">
+        <div>
+          <span>
+            WORKER
+          </span>
+          <i
+            *ngIf="previousOption.columnName === 'workerCount'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+      <th (click)="onSortTable('complianceStats.Total')">
+        <div>
+          <span>COMPLIANCE<br> SCORE</span>
+          <i
+            *ngIf="previousOption.columnName === 'complianceStats.Total'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+      <th (click)="onSortTable('grossPayTotal')">
+        <div>
+          <span>
+            GROSS<br> PAY (£)
+          </span>
+          <i
+            *ngIf="previousOption.columnName === 'grossPayTotal'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+      <th (click)="onSortTable('payrollAdminTotal')">
+        <div>
+          <span>
+            PAYROLL<br> ADMIN (£)
+          </span>
+          <i
+            *ngIf="previousOption.columnName === 'payrollAdminTotal'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+      <th (click)="onSortTable('labourCostTotal')">
+        <div>
+          <span>
+            LABOUR<br> COST (£)
+          </span>
+          <i
+            *ngIf="previousOption.columnName === 'labourCostTotal'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+      <th (click)="onSortTable('rebatesTotal')">
+        <div>
+          <span>
+            WORK-<br>FORCE
+          </span>
+          <i
+            *ngIf="previousOption.columnName === 'rebatesTotal'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-up': !previousOption.acending,
+              'fa-chevron-down': previousOption.acending
+            }"
+            aria-hidden="true">
+          </i>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let provider of (tableDataChanges | async) as tableData; let i=index;">
+      <td>
+        <app-text-display [value]="provider.name"></app-text-display>
+      </td>
+      <td>
+        <app-digits-display [value]="provider.workerCount"></app-digits-display>
+      </td>
+      <td>
+        <app-percentage-display [value]="provider.complianceStats?.Total" [isEmphasis]="true"></app-percentage-display>
+      </td>
+      <td>
+        <app-digits-display [value]="provider.grossPayTotal" [isEmphasis]="true"></app-digits-display>
+      </td>
+      <td>
+        <app-digits-display [value]="provider.payrollAdminTotal"></app-digits-display>
+      </td>
+      <td>
+        <app-digits-display [value]="provider.labourCostTotal"></app-digits-display>
+      </td>
+      <td>
+        <app-percentage-display [value]="provider.rebatesTotal"></app-percentage-display>
+      </td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="totalChanges | async as total">
+    <tr>
+      <td class="text-right">
+        <app-text-display [value]="total.name" [isEmphasis]="true"></app-text-display>
+      </td>
+      <td>
+        <app-digits-display [value]="total.workerCount" [isEmphasis]="true"></app-digits-display>
+      </td>
+      <td>
+        <app-percentage-display [value]="total.complianceStats.Total" [isEmphasis]="true"></app-percentage-display>
+      </td>
+      <td>
+        <app-digits-display [value]="total.grossPayTotal" [isEmphasis]="true"></app-digits-display>
+      </td>
+      <td>
+        <app-digits-display [value]="total.payrollAdminTotal" [isEmphasis]="true"></app-digits-display>
+      </td>
+      <td>
+        <app-digits-display [value]="total.labourCostTotal" [isEmphasis]="true"></app-digits-display>
+      </td>
+      <td>
+        <app-percentage-display [value]="total.rebatesTotal" [isEmphasis]="true"></app-percentage-display>
+      </td>
+    </tr>
+  </tbody>
+</table>

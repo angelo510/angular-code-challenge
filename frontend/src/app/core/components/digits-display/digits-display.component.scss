@@ -1,0 +1,15 @@
+@import "../../../../variables";
+
+:host {
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 28px;
+  color: $table-row-text-color;
+}
+
+.text-emphasis {
+  color: $table-row-emphasis-color;
+}
