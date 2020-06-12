@@ -17,4 +17,5 @@ export class PercentageDisplayComponent {
   private readonly percentageValueSubject = new ReplaySubject<number>(1);
   public readonly percentageValueChanges = this.percentageValueSubject.asObservable();
   @Input() public isEmphasis = false;
+  @Input() public hasFloat = false;
 }

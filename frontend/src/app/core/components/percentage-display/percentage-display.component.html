@@ -1,1 +1,1 @@
-<span [ngClass]="{'text-emphasis': isEmphasis}">{{ percentageValueChanges | async | number: '0.0-0' }}%</span>
+<span [ngClass]="{'text-emphasis': isEmphasis}">{{ percentageValueChanges | async | number: hasFloat ? '0.1-1' : '0.0-0' }}%</span>

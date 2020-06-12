@@ -1,5 +1,5 @@
 <h1 class="title">Labour cost report</h1>
-<table>
+<table *ngIf="totalChanges | async as total">
   <thead>
     <tr>
       <th (click)="onSortTable('name')">
@@ -115,7 +115,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let provider of (tableDataChanges | async) as tableData; let i=index;">
+    <tr *ngFor="let provider of (tableDataChanges | async) as tableData">
       <td>
         <app-text-display [value]="provider.name"></app-text-display>
       </td>
@@ -135,11 +135,11 @@
         <app-digits-display [value]="provider.labourCostTotal"></app-digits-display>
       </td>
       <td>
-        <app-percentage-display [value]="provider.rebatesTotal"></app-percentage-display>
+        <app-percentage-display [value]="(provider.workerCount / total.workerCount) * 100" [hasFloat]="true"></app-percentage-display>
       </td>
     </tr>
   </tbody>
-  <tbody *ngIf="totalChanges | async as total">
+  <tbody>
     <tr>
       <td class="text-right">
         <app-text-display [value]="total.name" [isEmphasis]="true"></app-text-display>
@@ -160,7 +160,7 @@
         <app-digits-display [value]="total.labourCostTotal" [isEmphasis]="true"></app-digits-display>
       </td>
       <td>
-        <app-percentage-display [value]="total.rebatesTotal" [isEmphasis]="true"></app-percentage-display>
+        <app-percentage-display [value]="(total.workerCount / total.workerCount) * 100" [isEmphasis]="true"></app-percentage-display>
       </td>
     </tr>
   </tbody>
