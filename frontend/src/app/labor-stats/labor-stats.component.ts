@@ -11,13 +11,13 @@ interface SortOption {
 
 const defaultOption: SortOption = {
   columnName: 'name',
-  acending: true
+  acending: true,
 };
 
 @Component({
   selector: 'app-labor-stats',
   templateUrl: './labor-stats.component.html',
-  styleUrls: ['./labor-stats.component.scss']
+  styleUrls: ['./labor-stats.component.scss'],
 })
 export class LaborStatsComponent {
   @Input() public set labourStatsData(value: LabourStats | null) {
@@ -27,47 +27,59 @@ export class LaborStatsComponent {
   }
 
   private readonly labourStatsSubject = new ReplaySubject<LabourStats>(1);
-  private readonly sortColumnSubject = new BehaviorSubject<SortOption>(defaultOption);
+  private readonly sortColumnSubject = new BehaviorSubject<SortOption>(
+    defaultOption
+  );
 
   public readonly directContractorChanges = this.labourStatsSubject.pipe(
-    map(labourStats => labourStats.directContractors)
+    map((labourStats) => labourStats.directContractors)
   );
 
   public readonly providersChanges = this.labourStatsSubject.pipe(
-    map(labourStats => labourStats.providers)
+    map((labourStats) => labourStats.providers)
   );
 
   public readonly totalChanges = this.labourStatsSubject.pipe(
-    map(labourStats => labourStats.total[0])
+    map((labourStats) => labourStats.total[0])
   );
 
   public readonly tableDataChanges = this.sortColumnSubject.pipe(
-    switchMap(sortOption =>
+    switchMap((sortOption) =>
       combineLatest([this.directContractorChanges, this.providersChanges]).pipe(
         map(([directContractors, providers]) => {
           if (sortOption.columnName === 'name') {
-            const sortedProviders = sortOption.acending ?
-              sortBy(providers, sortOption.columnName) : sortBy(providers, sortOption.columnName).reverse();
+            const sortedProviders = sortOption.acending
+              ? sortBy(providers, sortOption.columnName)
+              : sortBy(providers, sortOption.columnName).reverse();
             return [...directContractors, ...sortedProviders];
           }
-          const mergedProviders = sortBy([...directContractors, ...providers], sortOption.columnName);
-          return sortOption.acending ? mergedProviders : mergedProviders.reverse();
-        }),
-      )),
-    shareReplay({ bufferSize: 1, refCount: true }),
+          const mergedProviders = sortBy(
+            [...directContractors, ...providers],
+            sortOption.columnName
+          );
+          return sortOption.acending
+            ? mergedProviders
+            : mergedProviders.reverse();
+        })
+      )
+    ),
+    shareReplay({ bufferSize: 1, refCount: true })
   );
 
   public previousOption: SortOption = defaultOption;
 
   public onSortTable(colName: string): void {
     if (this.previousOption && this.previousOption.columnName === colName) {
-      this.sortColumnSubject.next({columnName: colName, acending: !this.previousOption.acending });
+      this.sortColumnSubject.next({
+        columnName: colName,
+        acending: !this.previousOption.acending,
+      });
       this.previousOption = {
         columnName: colName,
         acending: !this.previousOption.acending,
       };
     } else {
-      this.sortColumnSubject.next({columnName: colName, acending: true });
+      this.sortColumnSubject.next({ columnName: colName, acending: true });
       this.previousOption = {
         columnName: colName,
         acending: true,

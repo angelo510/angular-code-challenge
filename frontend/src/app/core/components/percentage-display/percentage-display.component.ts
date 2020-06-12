@@ -4,7 +4,7 @@ import { ReplaySubject } from 'rxjs';
 @Component({
   selector: 'app-percentage-display',
   templateUrl: './percentage-display.component.html',
-  styleUrls: ['./percentage-display.component.scss']
+  styleUrls: ['./percentage-display.component.scss'],
 })
 export class PercentageDisplayComponent {
   @Input() public set value(value: number) {

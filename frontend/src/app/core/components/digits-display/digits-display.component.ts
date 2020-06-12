@@ -5,7 +5,7 @@ import { ReplaySubject } from 'rxjs';
 @Component({
   selector: 'app-digits-display',
   templateUrl: './digits-display.component.html',
-  styleUrls: ['./digits-display.component.scss']
+  styleUrls: ['./digits-display.component.scss'],
 })
 export class DigitsDisplayComponent {
   constructor(private decimalPipe: DecimalPipe) {}

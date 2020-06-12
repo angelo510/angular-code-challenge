@@ -5,7 +5,8 @@
       <th (click)="onSortTable('name')">
         <div>
           <span>
-            PAYROLL<br> PROVIDER 
+            PAYROLL<br />
+            PROVIDER
           </span>
           <i
             *ngIf="previousOption.columnName === 'name'"
@@ -14,7 +15,8 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
@@ -30,13 +32,17 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
       <th (click)="onSortTable('complianceStats.Total')">
         <div>
-          <span>COMPLIANCE<br> SCORE</span>
+          <span
+            >COMPLIANCE<br />
+            SCORE</span
+          >
           <i
             *ngIf="previousOption.columnName === 'complianceStats.Total'"
             class="fa"
@@ -44,14 +50,16 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
       <th (click)="onSortTable('grossPayTotal')">
         <div>
           <span>
-            GROSS<br> PAY (£)
+            GROSS<br />
+            PAY (£)
           </span>
           <i
             *ngIf="previousOption.columnName === 'grossPayTotal'"
@@ -60,14 +68,16 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
       <th (click)="onSortTable('payrollAdminTotal')">
         <div>
           <span>
-            PAYROLL<br> ADMIN (£)
+            PAYROLL<br />
+            ADMIN (£)
           </span>
           <i
             *ngIf="previousOption.columnName === 'payrollAdminTotal'"
@@ -76,14 +86,16 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
       <th (click)="onSortTable('labourCostTotal')">
         <div>
           <span>
-            LABOUR<br> COST (£)
+            LABOUR<br />
+            COST (£)
           </span>
           <i
             *ngIf="previousOption.columnName === 'labourCostTotal'"
@@ -92,15 +104,14 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
       <th (click)="onSortTable('rebatesTotal')">
         <div>
-          <span>
-            WORK-<br>FORCE
-          </span>
+          <span> WORK-<br />FORCE </span>
           <i
             *ngIf="previousOption.columnName === 'rebatesTotal'"
             class="fa"
@@ -108,14 +119,15 @@
               'fa-chevron-up': !previousOption.acending,
               'fa-chevron-down': previousOption.acending
             }"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
           </i>
         </div>
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let provider of (tableDataChanges | async) as tableData">
+    <tr *ngFor="let provider of tableDataChanges | async as tableData">
       <td>
         <app-text-display [value]="provider.name"></app-text-display>
       </td>
@@ -123,44 +135,78 @@
         <app-digits-display [value]="provider.workerCount"></app-digits-display>
       </td>
       <td>
-        <app-percentage-display [value]="provider.complianceStats?.Total" [isEmphasis]="true"></app-percentage-display>
+        <app-percentage-display
+          [value]="provider.complianceStats?.Total"
+          [isEmphasis]="true"
+        ></app-percentage-display>
       </td>
       <td>
-        <app-digits-display [value]="provider.grossPayTotal" [isEmphasis]="true"></app-digits-display>
+        <app-digits-display
+          [value]="provider.grossPayTotal"
+          [isEmphasis]="true"
+        ></app-digits-display>
       </td>
       <td>
-        <app-digits-display [value]="provider.payrollAdminTotal"></app-digits-display>
+        <app-digits-display
+          [value]="provider.payrollAdminTotal"
+        ></app-digits-display>
       </td>
       <td>
-        <app-digits-display [value]="provider.labourCostTotal"></app-digits-display>
+        <app-digits-display
+          [value]="provider.labourCostTotal"
+        ></app-digits-display>
       </td>
       <td>
-        <app-percentage-display [value]="(provider.workerCount / total.workerCount) * 100" [hasFloat]="true"></app-percentage-display>
+        <app-percentage-display
+          [value]="(provider.workerCount / total.workerCount) * 100"
+          [hasFloat]="true"
+        ></app-percentage-display>
       </td>
     </tr>
   </tbody>
   <tbody>
     <tr>
       <td class="text-right">
-        <app-text-display [value]="total.name" [isEmphasis]="true"></app-text-display>
+        <app-text-display
+          [value]="total.name"
+          [isEmphasis]="true"
+        ></app-text-display>
       </td>
       <td>
-        <app-digits-display [value]="total.workerCount" [isEmphasis]="true"></app-digits-display>
+        <app-digits-display
+          [value]="total.workerCount"
+          [isEmphasis]="true"
+        ></app-digits-display>
       </td>
       <td>
-        <app-percentage-display [value]="total.complianceStats.Total" [isEmphasis]="true"></app-percentage-display>
+        <app-percentage-display
+          [value]="total.complianceStats.Total"
+          [isEmphasis]="true"
+        ></app-percentage-display>
       </td>
       <td>
-        <app-digits-display [value]="total.grossPayTotal" [isEmphasis]="true"></app-digits-display>
+        <app-digits-display
+          [value]="total.grossPayTotal"
+          [isEmphasis]="true"
+        ></app-digits-display>
       </td>
       <td>
-        <app-digits-display [value]="total.payrollAdminTotal" [isEmphasis]="true"></app-digits-display>
+        <app-digits-display
+          [value]="total.payrollAdminTotal"
+          [isEmphasis]="true"
+        ></app-digits-display>
       </td>
       <td>
-        <app-digits-display [value]="total.labourCostTotal" [isEmphasis]="true"></app-digits-display>
+        <app-digits-display
+          [value]="total.labourCostTotal"
+          [isEmphasis]="true"
+        ></app-digits-display>
       </td>
       <td>
-        <app-percentage-display [value]="(total.workerCount / total.workerCount) * 100" [isEmphasis]="true"></app-percentage-display>
+        <app-percentage-display
+          [value]="(total.workerCount / total.workerCount) * 100"
+          [isEmphasis]="true"
+        ></app-percentage-display>
       </td>
     </tr>
   </tbody>
